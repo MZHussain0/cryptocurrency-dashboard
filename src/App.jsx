@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import Currency from "./components/Currency/Currency";
 import Header from "./components/Header/Header";
 
 function App() {
@@ -13,16 +14,16 @@ function App() {
       <div className="py-5">
         <main className="w-11/12 py-5 px-8 bg-gray-200 m-auto grid grid-cols-1 sm:grid-cols-3 gap-x-2 gap-y-3 rounded-lg">
           <section className=" text-black  col-span-2">
-            {/* left top currency and search section */}
+            {/* CURRENCY FILTER and SEARCH SECTION */}
             <div className="grid grid-cols-6 min-h-[3rem] gap-x-2 gap-y-3 ">
-              <section className=" bg-white col-span-1 rounded-lg shadow-xl">
-                USD
+              <section className=" col-span-1">
+                <Currency />
               </section>
               <section className="bg-white col-span-5 rounded-lg shadow-xl ">
                 Search
               </section>
             </div>
-            {/* Middle chart section */}
+            {/*CHART SECTION */}
             <div className="grid grid-cols-1 py-3">
               <section className="bg-white col-span-1 rounded-lg shadow-xl min-h-[3rem]">
                 charts
