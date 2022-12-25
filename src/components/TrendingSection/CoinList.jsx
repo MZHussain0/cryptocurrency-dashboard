@@ -5,7 +5,7 @@ import CoinCard from "./CoinCard";
 
 const CoinList = () => {
   const coins = useSelector(getAllCoins);
-  console.log("🚀 ~ file: CoinList.jsx:7 ~ coins", coins);
+  // console.log("🚀 ~ file: CoinList.jsx:7 ~ coins", coins);
 
   return (
     <div className="p-4 bg-white overflow-hidden rounded-lg">

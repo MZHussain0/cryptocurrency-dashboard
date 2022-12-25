@@ -1,9 +1,13 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
+import Charts from "./components/Charts/Charts";
 
 // components import
 import Currency from "./components/Currency/Currency";
+import Exchange from "./components/Exchange/Exchange";
 import Header from "./components/Header/Header";
+import Portfolio from "./components/Portfolio/Portfolio";
+import MDropdown from "./components/sample/test";
 import SearchBar from "./components/SearchBar/SearchBar";
 import TopCoins from "./components/TrendingSection/TopCoins";
 
@@ -15,6 +19,7 @@ function App() {
 
   return (
     <Fragment>
+      <MDropdown />
       {/* Header Component */}
       <header className="bg-white">
         <Header />
@@ -41,7 +46,7 @@ function App() {
             {/*CHART SECTION */}
             <div className="grid grid-cols-1 py-3">
               <section className="bg-white col-span-1 rounded-lg shadow-xl min-h-[3rem]">
-                charts
+                <Charts />
               </section>
             </div>
             {/* ------------------------------------------------- */}
@@ -49,12 +54,12 @@ function App() {
             {/* portfolio and exchange section */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-3">
               <section className="bg-white rounded-lg shadow-xl min-h-[3rem]">
-                Portfolio
+                <Portfolio />
               </section>
               {/* ------------------------------------------------- */}
 
               <section className="bg-white rounded-lg shadow-xl min-h-[3rem]">
-                exchange
+                <Exchange />
               </section>
               {/* ----------------------------------------------- */}
             </div>

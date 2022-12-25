@@ -38,6 +38,10 @@ const coinsSlice = createSlice({
         console.log("Fetched coins successfully");
         return { ...state, coins: payload };
       })
+      .addCase(fetchAsyncHistoricData.fulfilled, (state, { payload }) => {
+        console.log("Fetched martket data successfully");
+        return { ...state, market: payload };
+      })
       .addCase(fetchAsyncCoins.rejected, (state, action) => {
         state.status = "Rejected";
         console.log("Rejected");
@@ -46,4 +50,5 @@ const coinsSlice = createSlice({
 });
 
 export const getAllCoins = (state) => state.coins.coins;
+export const getMarketData = (state) => state.coins.market;
 export default coinsSlice.reducer;
