@@ -7,7 +7,6 @@ const DropDown = ({ coins, setPrice, search }) => {
   const [inputValue, setInputValue] = useState("");
   const [selected, setSelected] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  console.log("searchF", search);
 
   const dispatch = useDispatch();
   return (

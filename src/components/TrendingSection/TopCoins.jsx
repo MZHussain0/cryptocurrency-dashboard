@@ -21,7 +21,6 @@ const TopCoins = ({ currency }) => {
       <CoinList />
     </div>
   );
-  return <div>TopCoins</div>;
 };
 
 export default TopCoins;

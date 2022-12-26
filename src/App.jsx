@@ -13,9 +13,10 @@ import TopCoins from "./components/TrendingSection/TopCoins";
 
 function App() {
   const currency = useSelector((state) => state.currencyFilter.currency);
+  console.log("🚀 ~ file: App.jsx:16 ~ currency", currency);
+
   const symbol = useSelector((state) => state.currencyFilter.symbol);
-  const coinId = useSelector((state) => state.currencyFilter.id);
-  console.log("coinId", coinId);
+  console.log("🚀 ~ file: App.jsx:19 ~ symbol", symbol);
 
   return (
     <Fragment>
@@ -46,7 +47,7 @@ function App() {
             {/*CHART SECTION */}
             <div className="grid grid-cols-1 py-3">
               <section className="bg-white col-span-1 rounded-lg shadow-xl min-h-[3rem]">
-                <Charts />
+                <Charts currency={currency} symbol={symbol} />
               </section>
             </div>
             {/* ------------------------------------------------- */}
