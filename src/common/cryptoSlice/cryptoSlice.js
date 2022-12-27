@@ -8,6 +8,7 @@ const initialState = {
   price_b: 0,
   price_symbol: "",
   days: 365,
+  chartType: "Line chart",
 };
 
 export const cryptoSlice = createSlice({
@@ -35,6 +36,9 @@ export const cryptoSlice = createSlice({
     setDays: (state, action) => {
       state.days = action.payload;
     },
+    setChartType: (state, action) => {
+      state.chartType = action.payload;
+    },
   },
 });
 
@@ -45,4 +49,5 @@ export const { setPrice_s } = cryptoSlice.actions;
 export const { setPrice_b } = cryptoSlice.actions;
 export const { setPrice_symbol } = cryptoSlice.actions;
 export const { setDays } = cryptoSlice.actions;
+export const { setChartType } = cryptoSlice.actions;
 export default cryptoSlice.reducer;

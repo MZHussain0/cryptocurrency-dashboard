@@ -1,63 +1,127 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-function MDropdown() {
+function Dropdownn({ coins }) {
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const ref = useRef();
 
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4"];
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
-
-  const handleCheckboxChange = (option) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(
-        selectedOptions.filter((selectedOption) => selectedOption !== option)
-      );
-    } else if (selectedOptions.length < 2) {
-      setSelectedOptions([...selectedOptions, option]);
-    }
-  };
+  const filteredOptions = coins.filter((coin) =>
+    coin?.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="relative">
+    <div ref={ref} className={"relative"}>
       <button
-        className="px-4 py-2 text-gray-700 hover:text-gray-900 focus:outline-none focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50"
-        onClick={toggleDropdown}
+        className="w-56 bg-slate-300 hover:bg-slate-400 font-semibold text-sm flex items-center
+         justify-between shadow-lg focus:outline-none"
+        onClick={() => setIsOpen((prevState) => !prevState)}
       >
-        {selectedOptions.length > 0
-          ? selectedOptions.join(", ")
-          : "Select options"}
+        <p>
+          {selectedOptions.length > 0
+            ? selectedOptions.join(", ")
+            : "Select Coins"}
+        </p>
+        <span>
+          <svg
+            width="24px"
+            height="24px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${isOpen ? "-rotate-180" : ""}`}
+          >
+            <path
+              d="M6.1018 8C5.02785 8 4.45387 9.2649 5.16108 10.0731L10.6829 16.3838C11.3801 17.1806 12.6197 17.1806 13.3169 16.3838L18.8388 10.0731C19.5459 9.2649 18.972 8 17.898 8H6.1018Z"
+              fill="#000"
+            />
+          </svg>
+        </span>
       </button>
-      {showDropdown && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg">
-          <div className="rounded-md bg-white shadow-xs">
-            <ul
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="options-menu"
-            >
-              {options.map((option) => (
-                <li
-                  key={option}
-                  className="flex items-start px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                  role="menuitem"
-                >
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                    checked={selectedOptions.includes(option)}
-                    onChange={() => handleCheckboxChange(option)}
-                  />
-                  <span className="ml-3">{option}</span>
-                </li>
-              ))}
-            </ul>
+
+      {isOpen && (
+        <div className="absolute h-60 overflow-auto border border-black left-0 z-30 mt-2 py-2 w-full flex flex-col rounded-md bg-white shadow-xl">
+          <input
+            className={`bg-white p-2 outline-none `}
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            placeholder="Search coins..."
+          />
+          <div className="border-b-2 border-red-300 flex flex-col bg-slate-200">
+            {selectedOptions.map((option) => (
+              <label
+                className={`w-full py-2 text-sm leading-5 text-left text-gray-500  focus:outline-none focus:bg-slate-400  transition duration-150 ease-in-out`}
+                key={option}
+              >
+                <input
+                  className="mx-4"
+                  type="checkbox"
+                  checked
+                  onChange={(event) => {
+                    if (!event.target.checked) {
+                      setSelectedOptions(
+                        selectedOptions.filter(
+                          (selectedOption) => selectedOption !== option
+                        )
+                      );
+                    }
+                  }}
+                />
+                {option}
+              </label>
+            ))}
           </div>
+
+          {filteredOptions.map((coin) => (
+            <label
+              className={`w-full py-2 text-l leading-5 text-left focus:outline-none focus:bg-slate-400 hover:bg-red-400 transition duration-150 ease-in-out ${
+                selectedOptions.includes(coin?.name) ||
+                selectedOptions.length >= 2
+                  ? "text-gray-500 cursor-not-allowed"
+                  : ""
+              }`}
+              key={coin?.id}
+            >
+              <input
+                className="mx-4"
+                type="checkbox"
+                disabled={
+                  selectedOptions.length >= 2 &&
+                  !selectedOptions.includes(coin?.name)
+                }
+                checked={selectedOptions.includes(coin?.name)}
+                onChange={(event) => {
+                  if (event.target.checked) {
+                    setSelectedOptions([...selectedOptions, coin?.name]);
+                  } else {
+                    setSelectedOptions(
+                      selectedOptions.filter(
+                        (selectedOption) => selectedOption !== coin?.name
+                      )
+                    );
+                  }
+                }}
+                onClick={() => setSearchTerm("")}
+              />
+              {coin?.name}
+            </label>
+          ))}
         </div>
       )}
     </div>
   );
 }
-export default MDropdown;
+
+export default Dropdownn;

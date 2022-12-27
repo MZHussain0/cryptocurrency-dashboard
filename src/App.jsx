@@ -8,6 +8,7 @@ import Exchange from "./components/Exchange/Exchange";
 import Header from "./components/Header/Header";
 import Portfolio from "./components/Portfolio/Portfolio";
 import MDropdown from "./components/sample/test";
+import CoinSelection from "./components/sample/test2";
 import SearchBar from "./components/SearchBar/SearchBar";
 import TopCoins from "./components/TrendingSection/TopCoins";
 
@@ -20,7 +21,6 @@ function App() {
 
   return (
     <Fragment>
-      <MDropdown />
       {/* Header Component */}
       <header className="bg-white">
         <Header />
@@ -72,6 +72,7 @@ function App() {
           {/* --------------------------------------------------- */}
         </main>
       </div>
+      {/* <CoinSelection /> */}
     </Fragment>
   );
 }
