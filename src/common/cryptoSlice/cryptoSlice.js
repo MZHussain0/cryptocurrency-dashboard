@@ -3,16 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   currency: "USD",
   symbol: "$",
-  id: "bitcoin",
-  price_s: 0,
-  price_b: 0,
+  price_s: "0",
+  price_b: "0",
   price_symbol: "",
   days: 365,
   chartType: "Line chart",
+  selectedCoins: [],
+  coinIDs: [],
 };
 
 export const cryptoSlice = createSlice({
-  name: "currencyFilter",
+  name: "globalStore",
   initialState,
   reducers: {
     setCurrency: (state, action) => {
@@ -39,15 +40,24 @@ export const cryptoSlice = createSlice({
     setChartType: (state, action) => {
       state.chartType = action.payload;
     },
+    setSelectedCoins: (state, action) => {
+      state.selectedCoins = action.payload;
+    },
+    setCoinIDs: (state, action) => {
+      state.coinIDs = action.payload;
+    },
   },
 });
 
-export const { setCurrency } = cryptoSlice.actions;
-export const { setSymbol } = cryptoSlice.actions;
-export const { setId } = cryptoSlice.actions;
-export const { setPrice_s } = cryptoSlice.actions;
-export const { setPrice_b } = cryptoSlice.actions;
-export const { setPrice_symbol } = cryptoSlice.actions;
-export const { setDays } = cryptoSlice.actions;
-export const { setChartType } = cryptoSlice.actions;
+export const {
+  setCurrency,
+  setSymbol,
+  setPrice_b,
+  setPrice_s,
+  setPrice_symbol,
+  setDays,
+  setChartType,
+  setSelectedCoins,
+  setCoinIDs,
+} = cryptoSlice.actions;
 export default cryptoSlice.reducer;

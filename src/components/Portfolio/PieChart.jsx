@@ -27,7 +27,7 @@ const PieChart = ({ data, labels }) => {
         position: "right",
         fullWidth: false,
         labels: {
-          color: "#222",
+          color: "#5c5c5c",
           padding: 20,
           usePointStyle: true,
           font: {
@@ -55,7 +55,7 @@ const PieChart = ({ data, labels }) => {
   };
 
   return (
-    <div className="pl-5 pt-4 w-[350px]">
+    <div className="pl-5 flex items-center justify-center pt-4 pb-4 w-[350px]">
       <Pie data={chartData} options={options} plugins={plugins}></Pie>
     </div>
   );

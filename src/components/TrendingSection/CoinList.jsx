@@ -5,11 +5,10 @@ import CoinCard from "./CoinCard";
 
 const CoinList = () => {
   const coins = useSelector(getAllCoins);
-  // console.log("🚀 ~ file: CoinList.jsx:7 ~ coins", coins);
 
   return (
-    <div className="p-4 bg-white overflow-hidden rounded-lg">
-      <div className="text-l mb-3 font-semibold">
+    <div className="pt-4 px-2  overflow-hidden">
+      <div className="text-l mb-4 text-center font-semibold">
         Cryptocurrencies by market cap
       </div>
       <div className="">

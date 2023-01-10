@@ -17,7 +17,7 @@ const TopCoins = ({ currency }) => {
   return loading ? (
     <div>Loading...</div>
   ) : (
-    <div>
+    <div className="">
       <CoinList />
     </div>
   );

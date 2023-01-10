@@ -12,14 +12,6 @@ const SearchBar = () => {
   const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  // useEffect(() => {
-  //   let handler = () => {
-  //     setIsOpen(false);
-  //   };
-  //   document.addEventListener("mousedown", handler);
-  //   return () => document.removeEventListener("mousedown", handler);
-  // }, []);
-
   const submitHandler = (e) => {
     e.preventDefault();
   };
@@ -31,7 +23,6 @@ const SearchBar = () => {
     );
     searchWord === "" ? setSearch([]) : setSearch(filteredArray);
   };
-  // console.log("search result", search);
 
   return (
     <div
@@ -41,12 +32,12 @@ const SearchBar = () => {
       <form onSubmit={submitHandler}>
         <div
           className={
-            "flex justify-between overflow-hidden border-4 border-slate-300 h-[72px] rounded-lg shadow-xl"
+            "flex justify-between overflow-hidden border-2  rounded-lg shadow-xl"
           }
         >
           <input
             type="text"
-            className="block w- flex-1 py-2 px-3 bg-white font-semibold"
+            className="block w-full flex-1 py-4 px-4 bg-light-fill dark:bg-dark-fill font-semibold"
             placeholder="Search your favourite cryptocurrencies"
             id="search"
             onChange={searchChangeHandler}
@@ -59,7 +50,7 @@ const SearchBar = () => {
 
       {search.length != 0 && (
         <div
-          className={`absolute mt-2 w-1/2 overflow-hidden rounded-lg shadow-xl shadow- bg-slate-400 border-4 border-slate-300 ${
+          className={`absolute w-full z-20 flex flex-col border-2 border-black  overflow-hidden  shadow-xl bg-light-fill dark:bg-dark-fill rounded-lg  ${
             isOpen ? "" : "hidden"
           }`}
         >

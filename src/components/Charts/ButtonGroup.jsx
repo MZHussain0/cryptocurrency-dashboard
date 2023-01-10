@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 const ButtonGroup = ({
   chartDays,
@@ -13,14 +12,14 @@ const ButtonGroup = ({
   };
 
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 pb-1">
       {chartDays.map((day) => (
         <button
           key={day.value}
-          className={`px-4 py-2 bg-slate-300 font-semibold text-sm rounded-lg outline-none focus:outline-none ${
+          className={`px-4 py-2 bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm rounded-lg outline-none focus:outline-none ${
             selectedValue === day.value
-              ? " text-white bg-blue-500"
-              : "bg-slate-300"
+              ? " text-white bg-light-button-selected dark:bg-dark-button-selected hover:bg-light-button-selected-hover dark:hover:bg-dark-button-selected-hover"
+              : "bg-light-button dark:bg-dark-button"
           }`}
           onClick={() => handleClick(day.value)}
         >

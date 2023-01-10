@@ -1,4 +1,5 @@
 import React from "react";
+import { Fragment } from "react";
 
 import { portfolioDetails } from "./Data";
 import PieChart from "./PieChart";
@@ -13,18 +14,18 @@ const Portfolio = () => {
   const data = portfolioDetails.map((p) => p.amount);
 
   return (
-    <div>
-      <div className="flex items-center justify-between pt-4 px-8">
+    <Fragment>
+      <div className="flex items-center justify-between pt-4 px-8 text-light-base dark:text-dark-base">
         <h1 className="font-bold">Portfolio</h1>
-        <p className="font-semibold text-slate-500 text-sm">
+        <p className="font-semibold text-sm">
           Total value :{" "}
-          <span className="font-semibold text-black text-base">
+          <span className="font-semibold text-light-muted dark:text-dark-muted">
             ${totalValue}
           </span>{" "}
         </p>
       </div>
       <PieChart labels={labels} data={data} />
-    </div>
+    </Fragment>
   );
 };
 

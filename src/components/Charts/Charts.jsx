@@ -1,49 +1,146 @@
 import React from "react";
-import { Fragment } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { Fragment, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
+  clearData,
   fetchAsyncHistoricData,
-  getAllChartData,
 } from "../../common/cryptoSlice/chartSlice";
 import { getAllCoins } from "../../common/cryptoSlice/coinsSlice";
 import { filteredData } from "../../common/miscelleneous/filterData";
-import DropDown from "../Exchange/DropDown";
-import Dropdownn from "../sample/test";
-import BarChart from "./BarChart";
 import ButtonGroup from "./ButtonGroup";
 import ChartType from "./ChartType";
 import { chartDays } from "./days";
-import LineChart from "./LineChart";
 import MultiCoinSelectionBtn from "./MultiCoinSelectionBtn";
+import { compactNumbers } from "../../common/miscelleneous/compactNumbers";
+import { getRandomColor } from "../../common/miscelleneous/randomColor";
+import ChartCanvas from "./ChartCanvas";
 
 const Charts = () => {
   const dispatch = useDispatch();
   const [days, setDays] = useState(1);
   const [selectedValue, setSelectedValue] = useState(null);
+  const currency = useSelector((state) => state.globalStore.currency);
+  const symbol = useSelector((state) => state.globalStore.symbol);
 
-  const currency = useSelector((state) => state.currencyFilter.currency);
-  const coinId = useSelector((state) => state.currencyFilter.id);
+  const coinIDs = useSelector((state) => state.globalStore.coinIDs);
+
+  const marketCapData = useSelector((state) => state.market.data);
+
+  const loading = useSelector((state) => state.market.loading);
+  const error = useSelector((state) => state.market.error);
+
+  const fetchData = () => {
+    coinIDs.forEach((id) => {
+      dispatch(fetchAsyncHistoricData({ id, currency: currency, days: days }));
+    });
+  };
 
   useEffect(() => {
-    dispatch(fetchAsyncHistoricData({ coinId, currency, days }));
-  }, [currency, coinId, days]);
+    // Dispatch the action to fetch marketcap
+    fetchData();
+    dispatch(clearData());
+  }, [currency, coinIDs, days]);
 
-  const mktData = useSelector(getAllChartData);
   const coins = useSelector(getAllCoins);
 
-  const chartData = mktData.market_caps?.length
-    ? filteredData(mktData.market_caps)
-    : "";
+  const cdata = filteredData(marketCapData[coinIDs[0]]);
+
+  // Labels: converts the data into proper dates format
+  // also returns time if 1 day is selected else return dates
+  const labels = cdata.map((data) => {
+    let date = new Date(data[0]);
+    let time =
+      date.getHours() > 12
+        ? `${date.getHours() - 12} PM`
+        : `${date.getHours()} AM`;
+    return days === 1
+      ? time
+      : date.toLocaleDateString("en-US", { month: "long", day: "numeric" });
+  });
+
+  const datasets = Object.keys(marketCapData).map((id) => ({
+    label: id,
+    data: filteredData(marketCapData[id]).map((datum) => datum[1]),
+    fill: false,
+    borderColor: getRandomColor(),
+    tension: 0.1,
+    pointColor: getRandomColor(),
+    backgroundColor: getRandomColor(),
+    hitRadius: 20,
+    hoverRadius: 5,
+  }));
+
+  const data = {
+    labels: labels,
+    datasets: datasets,
+  };
+
+  const options = {
+    interaction: {
+      intersect: false,
+      mode: "index",
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        ticks: {
+          // Include a selected currency symbol in the ticks
+          callback: function (value, index, ticks) {
+            return `${symbol}` + compactNumbers(value);
+          },
+          maxTicksLimit: 7,
+          grid: {
+            borderWidth: 2,
+            borderDash: [5, 5],
+            borderDashOffset: 2,
+          },
+        },
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            // formats the tooltip to show values if both charts in one tooltip
+            let label = context.dataset.label || "";
+            if (label) {
+              label += ": ";
+            }
+            if (context.parsed.y !== null) {
+              label += "$" + compactNumbers(context.parsed.y);
+            }
+            return label;
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: "Charts Canvas",
+      },
+      datalabels: {
+        display: false,
+      },
+      legend: {
+        position: "top",
+        fullWidth: false,
+        labels: {
+          color: "#5C5C5C",
+          usePointStyle: true,
+          font: {
+            size: 12,
+            weight: "bold",
+          },
+        },
+      },
+    },
+  };
 
   return (
     <Fragment>
-      {chartData && (
-        <Fragment>
-          <div className="flex flex-wrap justify-around p-4">
+      {marketCapData && (
+        <div className="bg-light-fill dark:bg-dark-fill rounded-lg">
+          <div className=" flex flex-wrap justify-around p-4">
             <ButtonGroup
               chartDays={chartDays}
               setDays={setDays}
@@ -51,20 +148,13 @@ const Charts = () => {
               selectedValue={selectedValue}
             />
 
-            <div className=" flex gap-1">
-              {/* <MultiCoinSelectionBtn coins={coins} /> */}
-              <Dropdownn coins={coins} />
+            <div className=" flex gap-1 ">
+              <MultiCoinSelectionBtn coins={coins} />
               <ChartType />
             </div>
           </div>
-
-          <div className="h-[250px]">
-            <LineChart chartData={chartData} days={days} currency={currency} />
-            {/* <BarChart chartData={chartData} days={days} currency={currency} /> */}
-          </div>
-
-          <div className=""></div>
-        </Fragment>
+          <ChartCanvas data={data} options={options} />
+        </div>
       )}
     </Fragment>
   );

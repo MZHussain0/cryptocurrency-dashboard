@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Api from "../APIs/Api";
+
 // Fetching crypto coins
 export const fetchAsyncCoins = createAsyncThunk(
   "coins/fetchAsyncCoins",
@@ -15,21 +16,19 @@ const initialState = {
   coins: [],
 };
 
+// coin slice section
+
 const coinsSlice = createSlice({
   name: "coins",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAsyncCoins.pending, (state, action) => {
-        console.log("Pending");
-      })
+      .addCase(fetchAsyncCoins.pending, (state, action) => {})
       .addCase(fetchAsyncCoins.fulfilled, (state, { payload }) => {
-        console.log("Fetched coins successfully");
         return { ...state, coins: payload };
       })
       .addCase(fetchAsyncCoins.rejected, (state, action) => {
-        state.status = "Rejected";
         console.log("Rejected");
       });
   },

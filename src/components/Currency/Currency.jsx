@@ -1,27 +1,57 @@
 // Library imports
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRef } from "react";
 // File imports
 import { setCurrency, setSymbol } from "../../common/cryptoSlice/cryptoSlice";
+import { fetchAsyncCurrencies } from "../../common/cryptoSlice/CurrencySlice";
+import { convertCurrency } from "../../common/miscelleneous/currencyToSymbol";
 
-const Currency = ({ currency, symbol }) => {
-  // Selected currency and it's symbol states
+const Currency = () => {
   const dispatch = useDispatch();
+  const ref = useRef();
 
+  const currencies = useSelector((state) => state.currencies.data);
+  const error = useSelector((state) => state.currencies.error);
+  const loading = useSelector((state) => state.currencies.loading);
   const [isOpen, setIsOpen] = useState(false);
 
-  const currencies = ["USD", "INR"];
+  // setting default currency and symbol in a global state
+  const currency = useSelector((state) => state.globalStore.currency);
+  const symbol = useSelector((state) => state.globalStore.symbol);
+
+  const fetchCurrencies = () => {
+    dispatch(fetchAsyncCurrencies());
+  };
+  useEffect(() => {
+    fetchCurrencies();
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dispatch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <div className="w-32 relative flex flex-col items-center   rounded-lg ">
+    <div ref={ref} className="relative flex items-center justify-center">
       <button
-        className="w-full flex items-center justify-between  bg-slate-300 font-bold border-4 border-white border-transparent focus:outline-none text-black rounded-lg hover:bg-slate-400  focus:ring ring-gray-200 shadow-xl"
+        className=" min-w-full h-16 flex items-center justify-between  bg-light-button dark:bg-dark-button font-bold  focus:outline-none  hover:bg-light-button-hover dark:hover:bg-dark-button-hover shadow-lg"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <p className="px-4">
-          {symbol} {currency}
-        </p>
+        <p className="text-center">{currency.toUpperCase()}</p>
         <span>
           <svg
             width="24px"
@@ -40,24 +70,22 @@ const Currency = ({ currency, symbol }) => {
       </button>
 
       <div
-        className={`absolute top-full min-w-full w-max bg-white shadow-md mt-1 rounded ${
+        className={`absolute top-full max-h-60 overflow-y-auto border-2 border-black min-w-full w-max bg-light-fill dark:bg-dark-fill z-10 mt-1 rounded-lg shadow-xl ${
           isOpen ? "block" : "hidden"
         }`}
       >
-        <ul className="text-left rounded bg-slate-400 shadow-lg shadow-black">
-          {currencies.map((curr) => (
+        <ul className="">
+          {currencies.map((currency) => (
             <li
-              key={curr}
-              className={`px-3 py-3 cursor-pointer hover:bg-slate-500 text- font-bold border-b hover:text-white border-l-transparent hover:border-l-4 hover:border-white`}
+              key={currency}
+              className={`p-4 cursor-pointer hover:bg-light-list-hover dark:hover:bg-dark-list-hover font-bold  hover:text-white rounded-lg `}
               onClick={() => {
-                curr === "USD"
-                  ? dispatch(setSymbol("$"))
-                  : dispatch(setSymbol("₹"));
-                dispatch(setCurrency(curr));
+                dispatch(setCurrency(currency));
+                dispatch(setSymbol(convertCurrency(currency)));
                 setIsOpen(false);
               }}
             >
-              {`${curr}`}
+              {currency.toUpperCase()}
             </li>
           ))}
         </ul>

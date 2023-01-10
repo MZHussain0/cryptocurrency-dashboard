@@ -5,45 +5,62 @@ import Api from "../APIs/Api";
 
 export const fetchAsyncHistoricData = createAsyncThunk(
   "market/fetchAsyncHistoricData",
-  async (params) => {
+  async (params, thunkAPI) => {
+    const { id, currency, days } = params;
     try {
-      const { coinId, currency, days } = params;
-      const response = await Api.get(`coins/${coinId}/market_chart`, {
+      const response = await Api.get(`coins/${id}/market_chart`, {
         params: {
           vs_currency: currency,
           days,
         },
       });
-      return response.data;
+      return response.data.market_caps;
     } catch (error) {
-      return error;
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-const initialState = {
-  market: [],
-};
+// Chart data slice
 
 const chartSlice = createSlice({
   name: "market",
-  initialState,
-  reducers: {},
+  initialState: {
+    data: {},
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    clearData: (state) => {
+      return {
+        ...state,
+        data: {},
+        error: null,
+        loading: false,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAsyncHistoricData.pending, (state, action) => {
-        console.log("Pending");
+        state.loading = true;
+        const { id } = action.meta;
       })
-      .addCase(fetchAsyncHistoricData.fulfilled, (state, { payload }) => {
-        console.log("Fetched chart data successfully");
+      .addCase(fetchAsyncHistoricData.fulfilled, (state, action) => {
+        const { id } = action.meta.arg;
+        state.data[id] = action.payload;
 
-        return { ...state, market: payload };
+        state.loading = false;
       })
       .addCase(fetchAsyncHistoricData.rejected, (state, action) => {
-        console.log("Rejected");
+        const { id } = action.meta;
+
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export const getAllChartData = (state) => state.market.market;
+export const { clearData } = chartSlice.actions;
+
 export default chartSlice.reducer;

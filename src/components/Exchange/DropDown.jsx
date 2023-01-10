@@ -1,6 +1,5 @@
 import React from "react";
-import { Fragment } from "react";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const DropDown = ({ coins, setPrice, search }) => {
@@ -12,8 +11,8 @@ const DropDown = ({ coins, setPrice, search }) => {
   return (
     <Fragment>
       <button
-        className="col-span-3 bg-slate-300 hover:bg-slate-400 font-semibold text-sm flex items-center
-         justify-between shadow-lg"
+        className="col-span-3 bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
+         justify-center shadow-lg"
         onClick={() => setIsOpen(!isOpen)}
       >
         <p className="px-4">
@@ -41,18 +40,18 @@ const DropDown = ({ coins, setPrice, search }) => {
       </button>
 
       <ul
-        className={` absolute bg-white overflow-y-auto border z-10 top-12 left-16 border-black ${
-          isOpen ? "max-h-60" : "hidden"
+        className={` absolute bg-light-fill dark:bg-dark-fill overflow-y-auto border z-10 border-black dark:border-white  ${
+          isOpen ? "max-h-40" : "hidden"
         } `}
       >
         {search && (
-          <div className="flex items-center px-2  bg-white   min-w-min">
+          <div className="flex items-center px-2 min-w-min">
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value.toLowerCase())}
               placeholder="Search currency..."
-              className={`bg-white p-2 outline-none`}
+              className={`bg-light-fill dark:bg-dark-fill p-2 outline-none`}
             />
           </div>
         )}
@@ -60,10 +59,10 @@ const DropDown = ({ coins, setPrice, search }) => {
         {coins?.map((coin) => (
           <li
             key={coin?.name}
-            className={`py-2 px-4 text-sm hover:bg-red-400 hover:text-white bg-slate-100 border-b-2 rounded
+            className={`py-2 px-4 text-sm hover:bg-dark-list-hover hover:text-white
           ${
             coin?.name?.toLowerCase() === selected?.toLowerCase() &&
-            "bg-red-400 text-red-400"
+            "bg-light-list-selected text-white"
           }
           ${
             coin?.name?.toLowerCase().startsWith(inputValue)
@@ -75,7 +74,7 @@ const DropDown = ({ coins, setPrice, search }) => {
                 setSelected(coin?.name);
                 setIsOpen(false);
                 setInputValue("");
-                dispatch(setPrice(coin));
+                dispatch(setPrice(coin.current_price));
               }
             }}
           >

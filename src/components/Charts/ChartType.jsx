@@ -1,23 +1,20 @@
 import React from "react";
-import { Fragment } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setChartType } from "../../common/cryptoSlice/cryptoSlice";
 
 const ChartType = () => {
-  const charts = ["Line chart", "Bar chart"];
+  const charts = ["Line Chart", "Bar Chart"];
 
-  const [selected, setSelected] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const chartType = useSelector((state) => state.currencyFilter.chartType);
+  const chartType = useSelector((state) => state.globalStore.chartType);
   const dispatch = useDispatch();
 
   return (
     <div className="relative">
       <button
-        className="relative col-span-3 bg-slate-300 hover:bg-slate-400 font-semibold text-sm flex items-center
+        className="relative col-span-3 bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
          justify-between shadow-lg"
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -40,15 +37,15 @@ const ChartType = () => {
       </button>
 
       <ul
-        className={` absolute bg-white w-full overflow-y-auto border z-10 top-12 border-black ${
+        className={` absolute bg-light-fill dark:bg-dark-fill w-full overflow-y-auto border z-10 top-12 border-black dark:border-white ${
           isOpen ? "max-h-60" : "hidden"
         } `}
       >
         {charts?.map((chart) => (
           <li
             key={chart}
-            className={`py-2 px-4 text-sm hover:bg-red-400 hover:text-white bg-slate-100 border-b-2 rounded
-          ${chart === chartType && "bg-red-400 text-red-400"}`}
+            className={`py-2 px-4 text-sm hover:bg-light-list-hover hover:text-white
+          ${chart === chartType && ""}`}
             onClick={() => {
               dispatch(setChartType(chart));
               setIsOpen(false);
