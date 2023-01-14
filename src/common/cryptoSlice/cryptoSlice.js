@@ -10,6 +10,8 @@ const initialState = {
   chartType: "Line chart",
   selectedCoins: [],
   coinIDs: [],
+  toDate: "",
+  fromDate: "",
 };
 
 export const cryptoSlice = createSlice({
@@ -46,6 +48,12 @@ export const cryptoSlice = createSlice({
     setCoinIDs: (state, action) => {
       state.coinIDs = action.payload;
     },
+    setToDate: (state, action) => {
+      state.toDate = action.payload;
+    },
+    setFromDate: (state, action) => {
+      state.fromDate = action.payload;
+    },
   },
 });
 
@@ -59,5 +67,7 @@ export const {
   setChartType,
   setSelectedCoins,
   setCoinIDs,
+  setToDate,
+  setFromDate,
 } = cryptoSlice.actions;
 export default cryptoSlice.reducer;

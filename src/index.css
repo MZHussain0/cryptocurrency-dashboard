@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+
+  button {
+    @apply px-4 py-2 rounded-md shadow-lg
+  }
+
   :root {
     /* light color thmes */
     --color-text-light-base: #191919;
@@ -19,7 +24,7 @@
     /* dark color themes */
     --color-text-dark-base: #E8E8E8;
     --color-text-dark-muted: #BABABA;
-    --color-dark-fill: #000;
+    --color-dark-fill: #222222;
     --color-fill-dark-muted: #171717;
     --color-dark-button: #454545;
     --color-button-dark-hover: #5C5C5C;
@@ -28,12 +33,6 @@
     --color-button-dark-selected: #0476D0;
     --color-button-dark-selected-hover: #088FFA;
   }
-}
-
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  grid-gap: 16px;
 }
 
 .dashboard_item {
@@ -47,8 +46,6 @@
   font-weight: 400;
   margin: 0 auto;
 
-  background-color: white;
-  /* background-color: #f9fafd; */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -56,40 +53,9 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   padding: 0;
   margin: 0 auto;
   color: #1a1a1a
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  /* font-size: 1em; */
-  /* font-weight: 500; */
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }

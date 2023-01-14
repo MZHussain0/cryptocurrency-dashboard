@@ -14,8 +14,8 @@ const ChartType = () => {
   return (
     <div className="relative">
       <button
-        className="relative col-span-3 bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
-         justify-between shadow-lg"
+        className="relative px-4 py-2 rounded bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
+         justify-between shadow"
         onClick={() => setIsOpen(!isOpen)}
       >
         <p className="px-4">{chartType}</p>

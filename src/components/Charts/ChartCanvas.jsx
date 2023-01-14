@@ -27,7 +27,14 @@ const ChartCanvas = ({ data, options }) => {
   const chartType = useSelector((state) => state.globalStore.chartType);
 
   return (
-    <div className="h-[250px]">
+    <div
+      style={{
+        position: "relative",
+        width: "99%",
+        height: "260px",
+        marginTop: "1rem",
+      }}
+    >
       {chartType === "Bar Chart" ? (
         <Bar data={data} options={options} />
       ) : (

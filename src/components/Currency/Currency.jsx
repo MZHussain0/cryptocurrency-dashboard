@@ -48,14 +48,14 @@ const Currency = () => {
   return (
     <div ref={ref} className="relative flex items-center justify-center">
       <button
-        className=" min-w-full h-16 flex items-center justify-between  bg-light-button dark:bg-dark-button font-bold  focus:outline-none  hover:bg-light-button-hover dark:hover:bg-dark-button-hover shadow-lg"
+        className=" min-w-full h-[3.5rem] flex items-center justify-between  bg-light-button dark:bg-dark-button font-bold  focus:outline-none  hover:bg-light-button-hover dark:hover:bg-dark-button-hover shadow-lg"
         onClick={() => setIsOpen(!isOpen)}
       >
         <p className="text-center">{currency.toUpperCase()}</p>
         <span>
           <svg
-            width="24px"
-            height="24px"
+            width="20px"
+            height="20px"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

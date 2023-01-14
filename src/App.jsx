@@ -14,51 +14,53 @@ function App() {
   const symbol = useSelector((state) => state.globalStore.symbol);
 
   return (
-    <div className="max-h-screen bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+    <div className="min-h-screen max-w-screen-2xl bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
       {/* Header Component */}
       <header className="">
         <Header />
       </header>
 
       {/* Main content Area */}
-      <div className="p-4 ">
-        <div className="dashboard bg-light-muted dark:bg-dark-muted duration-100 rounded-lg py-4 px-8  m-auto p-4 grid sm:grid-cols-1 xl:grid-cols-4 gap-4 ">
-          <main className="dashboard col-span-1 xl:col-span-3 sm:grid-cols-3 md:grid-cols-4">
+      <div className="p-4">
+        <div className=" bg-light-muted dark:bg-dark-muted duration-100 rounded p-4  m-auto grid grid-cols-1 lg:grid-cols-4 gap-4 ">
+          <main className="grid gap-4 lg:col-span-3">
             {/* Currency Selector */}
             {/* ----------------------------------------------- */}
-            <section className=" md:col-span-1 col-span-1 sm:col-span-1">
-              <Currency />
-            </section>
-            {/* ----------------------------------------------- */}
-
-            {/* SearchBar Section */}
-            <section className=" md:col-span-3 sm:col-span-2 ">
-              <SearchBar currency={currency} symbol={symbol} />
-            </section>
+            <div className="grid gap-4 grid-cols-9 grid-rows-1">
+              <section className="col-span-2 text-light-base dark:text-dark-base text-sm sm:text-base ">
+                <Currency />
+              </section>
+              {/* ----------------------------------------------- */}
+              {/* SearchBar Section */}
+              <section className="col-span-7 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+                <SearchBar currency={currency} symbol={symbol} />
+              </section>
+            </div>
             {/* ----------------------------------------------- */}
 
             {/*CHART SECTION */}
-            <section className="dashboard_item md:col-span-full sm:col-span-full">
+            <section className="bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
               <Charts currency={currency} symbol={symbol} />
             </section>
             {/* ------------------------------------------------- */}
 
             {/* Portfolio Section */}
-            <section className="dashboard_item md:col-span-2 sm:col-span-full bg-light-fill dark:bg-dark-fill">
-              <Portfolio />
-            </section>
-
-            {/* Exchange Section */}
-            {/* ------------------------------------------------- */}
-            <section className="dashboard_item md:col-span-2 sm:col-span-full bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
-              <Exchange />
-            </section>
+            <div className="grid md:grid-cols-2 gap-4">
+              <section className="md:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+                <Portfolio />
+              </section>
+              {/* Exchange Section */}
+              {/* ------------------------------------------------- */}
+              <section className="md:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+                <Exchange />
+              </section>
+            </div>
 
             {/* ----------------------------------------------- */}
             {/* --------------------------------------------------- */}
           </main>
           {/* Trending Section */}
-          <aside className="dashboard_item col-span-full xl:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+          <aside className="lg:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
             <TopCoins currency={currency} />
           </aside>
         </div>

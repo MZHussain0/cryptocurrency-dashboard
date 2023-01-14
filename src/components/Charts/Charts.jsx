@@ -24,6 +24,10 @@ const Charts = () => {
 
   const coinIDs = useSelector((state) => state.globalStore.coinIDs);
 
+  const fromDate = useSelector((state) => state.globalStore.fromDate);
+
+  const toDate = useSelector((state) => state.globalStore.toDate);
+
   const marketCapData = useSelector((state) => state.market.data);
 
   const loading = useSelector((state) => state.market.loading);
@@ -80,6 +84,7 @@ const Charts = () => {
       intersect: false,
       mode: "index",
     },
+    aspectRatio: 2,
     responsive: true,
     maintainAspectRatio: false,
     scales: {
@@ -108,7 +113,7 @@ const Charts = () => {
               label += ": ";
             }
             if (context.parsed.y !== null) {
-              label += "$" + compactNumbers(context.parsed.y);
+              label += `${symbol}` + compactNumbers(context.parsed.y);
             }
             return label;
           },
@@ -140,7 +145,7 @@ const Charts = () => {
     <Fragment>
       {marketCapData && (
         <div className="bg-light-fill dark:bg-dark-fill rounded-lg">
-          <div className=" flex flex-wrap justify-around p-4">
+          <div className=" flex justify-around pt-4 flex-wrap gap-1">
             <ButtonGroup
               chartDays={chartDays}
               setDays={setDays}
@@ -148,11 +153,12 @@ const Charts = () => {
               selectedValue={selectedValue}
             />
 
-            <div className=" flex gap-1 ">
+            <div className=" flex gap-2 items-center justify-center flex-wrap">
               <MultiCoinSelectionBtn coins={coins} />
               <ChartType />
             </div>
           </div>
+
           <ChartCanvas data={data} options={options} />
         </div>
       )}

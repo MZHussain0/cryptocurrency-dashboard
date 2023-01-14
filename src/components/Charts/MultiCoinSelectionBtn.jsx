@@ -66,7 +66,7 @@ const MultiCoinSelectionBtn = ({ coins }) => {
   return (
     <div ref={ref} className={"relative"}>
       <button
-        className="w-56 bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
+        className="min-w-full px-8 py-2 rounded-lg sm:w-full bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
          justify-between shadow-lg focus:outline-none"
         onClick={() => setIsOpen((prevState) => !prevState)}
       >

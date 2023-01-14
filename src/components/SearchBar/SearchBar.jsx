@@ -32,7 +32,7 @@ const SearchBar = () => {
       <form onSubmit={submitHandler}>
         <div
           className={
-            "flex justify-between overflow-hidden border-2  rounded-lg shadow-xl"
+            "flex justify-between overflow-hidden border rounded-lg shadow-xl border-white dark:border-black"
           }
         >
           <input

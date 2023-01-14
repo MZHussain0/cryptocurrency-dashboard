@@ -21,6 +21,25 @@ export const fetchAsyncHistoricData = createAsyncThunk(
   }
 );
 
+export const fetchAsyncHistoricDataRange = createAsyncThunk(
+  "market/fetchAsyncHistoricDataRange",
+  async (params, thunkAPI) => {
+    const { id, currency, from, to } = params;
+    try {
+      const response = await Api.get(`coins/${id}/market_chart/range`, {
+        params: {
+          vs_currency: currency,
+          from,
+          to,
+        },
+      });
+      return response.data.market_caps;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 // Chart data slice
 
 const chartSlice = createSlice({
@@ -53,6 +72,22 @@ const chartSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchAsyncHistoricData.rejected, (state, action) => {
+        const { id } = action.meta;
+
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchAsyncHistoricDataRange.pending, (state, action) => {
+        state.loading = true;
+        const { id } = action.meta;
+      })
+      .addCase(fetchAsyncHistoricDataRange.fulfilled, (state, action) => {
+        const { id } = action.meta.arg;
+        state.data[id] = action.payload;
+
+        state.loading = false;
+      })
+      .addCase(fetchAsyncHistoricDataRange.rejected, (state, action) => {
         const { id } = action.meta;
 
         state.loading = false;
