@@ -8,7 +8,27 @@
     @apply px-4 py-2 rounded-md shadow-lg
   }
 
+  .dashboard_item {
+    @apply rounded-lg shadow-lg
+  }
+
+  :root {}
+
+
+
   :root {
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    margin: 0 auto;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
     /* light color thmes */
     --color-text-light-base: #191919;
     --color-text-light-muted: #454545;
@@ -35,27 +55,8 @@
   }
 }
 
-.dashboard_item {
-  @apply rounded-lg shadow-lg
-}
-
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  margin: 0 auto;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
 body {
   margin: 0;
   padding: 0;
-  margin: 0 auto;
   color: #1a1a1a
 }
