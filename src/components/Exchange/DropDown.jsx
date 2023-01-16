@@ -1,4 +1,6 @@
 import React from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -8,9 +10,23 @@ const DropDown = ({ coins, setPrice, search }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useDispatch();
+  const ref = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <Fragment>
       <button
+        ref={ref}
         className="col-span-3 bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
          justify-center shadow-lg"
         onClick={() => setIsOpen(!isOpen)}

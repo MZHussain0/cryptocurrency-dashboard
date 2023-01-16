@@ -38,9 +38,13 @@ const Calendar = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleClick = () => {
     fetchData();
     setDropdownVisible(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -105,7 +109,8 @@ const Calendar = () => {
                 type="button"
                 className="w-full  py-2 px-4 border border-transparent  rounded-md bg-light-button-selected dark:bg-dark-button-selected hover:bg-light-button-selected-hover dark:hover:bg-dark-button-selected-hover hover:text-white font-semibold text-sm flex items-center
                 justify-between shadow-lg transition duration-150 ease-in-out"
-                onClick={handleSubmit}
+                onClick={handleClick}
+                onSubmit={handleSubmit}
               >
                 Submit
               </button>

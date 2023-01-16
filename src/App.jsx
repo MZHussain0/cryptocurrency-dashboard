@@ -8,7 +8,7 @@ import Exchange from "./components/Exchange/Exchange";
 import Header from "./components/Header/Header";
 import Portfolio from "./components/Portfolio/Portfolio";
 import SearchBar from "./components/SearchBar/SearchBar";
-import TopCoins from "./components/TrendingSection/TopCoins";
+import TopCoins from "./components/TopSection/TopCoins";
 
 function App() {
   const currency = useSelector((state) => state.globalStore.currency);
@@ -30,24 +30,24 @@ function App() {
               <section className="col-span-2 text-light-base dark:text-dark-base text-sm sm:text-base ">
                 <Currency />
               </section>
-              <section className="col-span-7 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+              <section className="dashboard_item col-span-7 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
                 <SearchBar currency={currency} symbol={symbol} />
               </section>
             </div>
             {/* ----------------------------------------------- */}
 
-            <section className="bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+            <section className="dashboard_item bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
               <Charts currency={currency} symbol={symbol} />
             </section>
             {/* ------------------------------------------------- */}
 
             <div className="grid md:grid-cols-2 gap-4">
-              <section className="md:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+              <section className="dashboard_item md:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
                 <Portfolio />
               </section>
               {/* ------------------------------------------------- */}
 
-              <section className="md:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+              <section className="dashboard_item md:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
                 <Exchange />
               </section>
             </div>
@@ -55,7 +55,7 @@ function App() {
             {/* ----------------------------------------------- */}
           </main>
 
-          <aside className="lg:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+          <aside className="dashboard_item lg:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
             <TopCoins currency={currency} />
           </aside>
         </div>

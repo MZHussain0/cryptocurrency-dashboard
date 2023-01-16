@@ -2,6 +2,8 @@
 
 // Library imports
 import React from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -15,9 +17,22 @@ const ChartType = () => {
 
   const chartType = useSelector((state) => state.globalStore.chartType);
   const dispatch = useDispatch();
+  const ref = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative">
+    <div ref={ref} className="relative">
       <button
         className="relative px-4 py-2 rounded bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
          justify-between shadow"
