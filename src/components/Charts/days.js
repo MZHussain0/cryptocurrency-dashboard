@@ -1,3 +1,5 @@
+// labels to display in chart component and it's corresponding value in days.
+
 export const chartDays = [
   {
     label: "1D",

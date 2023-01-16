@@ -1,7 +1,13 @@
+// component renders the pie charts based on the values in get in json format
+
+// Library imports
 import React from "react";
 import { Fragment } from "react";
 
+// Files imports
 import { portfolioDetails } from "./Data";
+
+// component imports
 import PieChart from "./PieChart";
 
 const Portfolio = () => {

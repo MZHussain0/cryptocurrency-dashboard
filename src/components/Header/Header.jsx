@@ -1,5 +1,10 @@
+// component displays the logo and theme implementation.
+
+// Library imports
 import React from "react";
 import { useEffect, useState } from "react";
+
+// Assets
 import logo from "../../assets/logo.png";
 
 const Header = () => {
@@ -39,6 +44,7 @@ const Header = () => {
         alt="Almabetter cryptocurrency dashboard"
       />
 
+      {/* Light/dark theme implementation */}
       <div className="mx-8 top-2 right-10 flex duration-100">
         {options.map((option) => (
           <button

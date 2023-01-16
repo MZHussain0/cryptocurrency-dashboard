@@ -1,3 +1,6 @@
+// Funtion takes the currency name and returns it's symbol.
+// Ex : USD => $
+
 const currencySymbols = {
   btc: "₿",
   eth: "Ξ",

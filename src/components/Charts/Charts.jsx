@@ -1,18 +1,25 @@
+// component renders the charts based on selected coins from a drop and type of chart selected. It fetches the data based on date and custom date ranges selected from a calendar component.
+
+// Library imports
 import React from "react";
 import { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+// Files imports
 import {
   clearData,
   fetchAsyncHistoricData,
 } from "../../common/cryptoSlice/chartSlice";
 import { getAllCoins } from "../../common/cryptoSlice/coinsSlice";
 import { filteredData } from "../../common/miscelleneous/filterData";
-import ButtonGroup from "./ButtonGroup";
-import ChartType from "./ChartType";
-import { chartDays } from "./days";
-import MultiCoinSelectionBtn from "./MultiCoinSelectionBtn";
 import { compactNumbers } from "../../common/miscelleneous/compactNumbers";
 import { getRandomColor } from "../../common/miscelleneous/randomColor";
+
+// component imports
+import { chartDays } from "./days";
+import ButtonGroup from "./ButtonGroup";
+import ChartType from "./ChartType";
+import MultiCoinSelectionBtn from "./MultiCoinSelectionBtn";
 import ChartCanvas from "./ChartCanvas";
 
 const Charts = () => {
@@ -24,14 +31,9 @@ const Charts = () => {
 
   const coinIDs = useSelector((state) => state.globalStore.coinIDs);
 
-  const fromDate = useSelector((state) => state.globalStore.fromDate);
-
-  const toDate = useSelector((state) => state.globalStore.toDate);
-
   const marketCapData = useSelector((state) => state.market.data);
 
   const loading = useSelector((state) => state.market.loading);
-  const error = useSelector((state) => state.market.error);
 
   const fetchData = () => {
     coinIDs.forEach((id) => {
@@ -49,8 +51,12 @@ const Charts = () => {
 
   const cdata = filteredData(marketCapData[coinIDs[0]]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   // Labels: converts the data into proper dates format
-  // also returns time if 1 day is selected else return dates
+  // also returns time in hours if 1 day is selected else return days with dates
   const labels = cdata.map((data) => {
     let date = new Date(data[0]);
     let time =
@@ -62,6 +68,7 @@ const Charts = () => {
       : date.toLocaleDateString("en-US", { month: "long", day: "numeric" });
   });
 
+  // maps the datasets based on selected coins to display charts in a single canvas
   const datasets = Object.keys(marketCapData).map((id) => ({
     label: id,
     data: filteredData(marketCapData[id]).map((datum) => datum[1]),
@@ -107,7 +114,7 @@ const Charts = () => {
       tooltip: {
         callbacks: {
           label: function (context) {
-            // formats the tooltip to show values if both charts in one tooltip
+            // formats the tooltip to show values of both charts in one tooltip
             let label = context.dataset.label || "";
             if (label) {
               label += ": ";

@@ -1,7 +1,14 @@
+// Component renders the list the coins sorted by marketcap
+
+// Library imports
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+
+// Files imports
 import { fetchAsyncCoins } from "../../common/cryptoSlice/coinsSlice";
+
+// Component imports
 import CoinList from "./CoinList";
 
 const TopCoins = ({ currency }) => {

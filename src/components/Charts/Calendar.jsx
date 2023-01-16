@@ -1,19 +1,24 @@
+// Component renders the dropdown for date range selection with a submit button
+
+// Library imports
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+
+// Files imports
 import { fetchAsyncHistoricDataRange } from "../../common/cryptoSlice/chartSlice";
 import { setFromDate, setToDate } from "../../common/cryptoSlice/cryptoSlice";
 
 const Calendar = () => {
   const dispatch = useDispatch();
   const fromDate = useSelector((state) => state.globalStore.fromDate);
-  const from = Math.floor(new Date(fromDate).getTime() / 1000);
-  console.log("🚀 ~ file: Calendar.jsx:11 ~ from", from);
-
   const toDate = useSelector((state) => state.globalStore.toDate);
-  const to = Math.floor(new Date(toDate).getTime() / 1000);
-  console.log("🚀 ~ file: Calendar.jsx:16 ~ to", to);
 
+  // converting yy-mm-dd into unix timestamp
+  const from = Math.floor(new Date(fromDate).getTime() / 1000);
+  const to = Math.floor(new Date(toDate).getTime() / 1000);
+
+  // global states from the store
   const currency = useSelector((state) => state.globalStore.currency);
   const coinIDs = useSelector((state) => state.globalStore.coinIDs);
 
@@ -32,18 +37,14 @@ const Calendar = () => {
       );
     });
   };
-  // Function to handle the submit button click
 
   const handleSubmit = () => {
-    // Make a GET request to the CoinGecko API to get the data for the selected dates
     fetchData();
-
     setDropdownVisible(false);
   };
 
   return (
     <div className="flex flex-col items-center relative  ">
-      {/* Button to toggle the dropdown */}
       <button
         className="relative bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
         justify-between shadow  px-2 py-1 md:px-4 md:py-2 rounded"
@@ -54,7 +55,7 @@ const Calendar = () => {
           width="20"
           height="20"
           fill="currentColor"
-          class="bi bi-calendar"
+          className="bi bi-calendar"
           viewBox="0 0 16 16"
         >
           {" "}

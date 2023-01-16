@@ -1,6 +1,11 @@
+// component renders a dropdown to select line chart or bar chart
+
+// Library imports
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+// Files imports
 import { setChartType } from "../../common/cryptoSlice/cryptoSlice";
 
 const ChartType = () => {

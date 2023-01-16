@@ -1,5 +1,7 @@
+// component renders a dropdown selector with list of supported currencies
+
 // Library imports
-import React, { Fragment } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
@@ -19,7 +21,6 @@ const Currency = () => {
 
   // setting default currency and symbol in a global state
   const currency = useSelector((state) => state.globalStore.currency);
-  const symbol = useSelector((state) => state.globalStore.symbol);
 
   const fetchCurrencies = () => {
     dispatch(fetchAsyncCurrencies());
@@ -48,7 +49,7 @@ const Currency = () => {
   return (
     <div ref={ref} className="relative flex items-center justify-center">
       <button
-        className=" min-w-full h-[3.5rem] flex items-center justify-between  bg-light-button dark:bg-dark-button font-bold  focus:outline-none  hover:bg-light-button-hover dark:hover:bg-dark-button-hover shadow-lg"
+        className=" min-w-full h-[3.5rem] flex items-center justify-between  bg-white dark:bg-dark-button font-bold  hover:bg-slate-200 dark:hover:bg-dark-button-hover shadow-lg"
         onClick={() => setIsOpen(!isOpen)}
       >
         <p className="text-center">{currency.toUpperCase()}</p>

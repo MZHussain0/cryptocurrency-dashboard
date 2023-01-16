@@ -1,5 +1,10 @@
+// Component renders the dropdown from the list of coins with checkboxes. User can select a maximum of two coins else the dropdown get grayed out.
+
+// Library imports
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+// Files imports
 import {
   setCoinIDs,
   setSelectedCoins,
@@ -14,10 +19,8 @@ const MultiCoinSelectionBtn = ({ coins }) => {
   const dispatch = useDispatch();
 
   const selectedCoins = useSelector((state) => state.globalStore.selectedCoins);
-  console.log("🚀 ~ file: test.jsx:16 ~ selectedCoins", selectedCoins);
 
   const coinID = useSelector((state) => state.globalStore.coinIDs);
-  console.log("🚀 ~ file: test.jsx:19 ~ coinID", coinID);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

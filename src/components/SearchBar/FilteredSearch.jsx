@@ -1,5 +1,7 @@
-import React, { Fragment } from "react";
-import { useDispatch } from "react-redux";
+// component renders the filtered coins
+
+// Library imports
+import React from "react";
 import { useSelector } from "react-redux";
 
 const FilteredSearch = ({ coin, setIsOpen }) => {

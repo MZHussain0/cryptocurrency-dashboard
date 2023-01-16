@@ -74,7 +74,7 @@ const DropDown = ({ coins, setPrice, search }) => {
                 setSelected(coin?.name);
                 setIsOpen(false);
                 setInputValue("");
-                dispatch(setPrice(coin.current_price));
+                dispatch(setPrice(coin));
               }
             }}
           >

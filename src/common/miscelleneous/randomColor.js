@@ -1,3 +1,5 @@
+// it generates the random color hexcode used in charts
+
 export const getRandomColor = () => {
   let letters = "0123456789ABCDEF".split("");
   let color = "#";

@@ -1,6 +1,11 @@
-import React from "react";
+// component renders the coin name and it's mcap.
+//  also renders the 24h percentage change.
 
+// Library imports
+import React from "react";
 import { useSelector } from "react-redux";
+
+// Files imports
 import upArrow from "../../assets/caret-up.svg";
 import downArrow from "../../assets/caret-down.svg";
 import { compactNumbers } from "../../common/miscelleneous/compactNumbers";

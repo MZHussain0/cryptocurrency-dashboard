@@ -1,4 +1,9 @@
+// Component renders the button element for 1D, 1W,1M,1Y along with the calendar component
+
+// Library Imports
 import React from "react";
+
+// components imports
 import Calendar from "./Calendar";
 
 const ButtonGroup = ({

@@ -1,15 +1,19 @@
+// component renders a input field which filters the data based on what the user enters
+// and displays in a dropdown.
+
+// Library imports
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+
+// Files imports
 import { getAllCoins } from "../../common/cryptoSlice/coinsSlice";
 import FilteredSearch from "./FilteredSearch";
 
 const SearchBar = () => {
   const coins = useSelector(getAllCoins);
-  // const coinId = useSelector((state) => state.currencyFilter.id);
 
   const [search, setSearch] = useState([]);
-  const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const submitHandler = (e) => {
