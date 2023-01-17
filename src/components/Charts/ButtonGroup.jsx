@@ -2,7 +2,9 @@
 
 // Library Imports
 import React from "react";
+import { useDispatch } from "react-redux";
 
+import { setIsCustomRange } from "../../common/cryptoSlice/cryptoSlice";
 // components imports
 import Calendar from "./Calendar";
 
@@ -12,9 +14,11 @@ const ButtonGroup = ({
   setSelectedValue,
   selectedValue,
 }) => {
+  const dispatch = useDispatch();
   const handleClick = (value) => {
     setSelectedValue(value);
     setDays(value);
+    dispatch(setIsCustomRange(false));
   };
 
   return (

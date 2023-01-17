@@ -104,7 +104,7 @@ const MultiCoinSelectionBtn = ({ coins }) => {
 
           {filteredOptions.map((coin) => (
             <label
-              className={`w-full py-2 text-l leading-5 text-left focus:outline-none hover:bg-light-list-hover transition duration-150 ease-in-out ${
+              className={`w-full py-2 text-sm leading-5 text-left focus:outline-none hover:bg-light-list-hover transition duration-150 ease-in-out ${
                 selectedCoins.includes(coin?.name) || selectedCoins.length >= 2
                   ? "text-gray-500 cursor-not-allowed"
                   : ""
@@ -112,7 +112,7 @@ const MultiCoinSelectionBtn = ({ coins }) => {
               key={coin?.id}
             >
               <input
-                className="mx-4"
+                className="mx-4 text-sm"
                 type="checkbox"
                 disabled={
                   selectedCoins.length >= 2 &&

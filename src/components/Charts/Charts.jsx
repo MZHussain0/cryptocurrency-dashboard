@@ -28,10 +28,13 @@ const Charts = () => {
   const [selectedValue, setSelectedValue] = useState(null);
   const currency = useSelector((state) => state.globalStore.currency);
   const symbol = useSelector((state) => state.globalStore.symbol);
+  const isCustomRange = useSelector((state) => state.globalStore.isCustomRange);
+  console.log("🚀 ~ file: Calendar.jsx:17 ~ isCustomRange", isCustomRange);
 
   const coinIDs = useSelector((state) => state.globalStore.coinIDs);
 
   const marketCapData = useSelector((state) => state.market.data);
+  console.log("🚀 ~ file: Charts.jsx:37 ~ marketCapData", marketCapData);
 
   const loading = useSelector((state) => state.market.loading);
 
@@ -42,17 +45,21 @@ const Charts = () => {
   };
 
   useEffect(() => {
-    // Dispatch the action to fetch marketcap
-    fetchData();
-    dispatch(clearData());
+    if (!isCustomRange) {
+      // Dispatch the action to fetch marketcap
+      fetchData();
+      dispatch(clearData());
+    }
   }, [currency, coinIDs, days]);
+
+  useEffect(() => {}, []);
 
   const coins = useSelector(getAllCoins);
 
   const cdata = filteredData(marketCapData[coinIDs[0]]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="h-[260px] text-center p-4">Loading...</div>;
   }
 
   // Labels: converts the data into proper dates format

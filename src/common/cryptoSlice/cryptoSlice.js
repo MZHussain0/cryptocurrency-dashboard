@@ -12,6 +12,7 @@ const initialState = {
   coinIDs: [],
   toDate: "",
   fromDate: "",
+  isCustomRange: false,
 };
 
 export const cryptoSlice = createSlice({
@@ -54,6 +55,9 @@ export const cryptoSlice = createSlice({
     setFromDate: (state, action) => {
       state.fromDate = action.payload;
     },
+    setIsCustomRange: (state, action) => {
+      state.isCustomRange = action.payload;
+    },
   },
 });
 
@@ -69,5 +73,6 @@ export const {
   setCoinIDs,
   setToDate,
   setFromDate,
+  setIsCustomRange,
 } = cryptoSlice.actions;
 export default cryptoSlice.reducer;

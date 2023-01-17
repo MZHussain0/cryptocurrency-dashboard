@@ -2,15 +2,21 @@
 
 // Library imports
 import React, { useState } from "react";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 // Files imports
 import { fetchAsyncHistoricDataRange } from "../../common/cryptoSlice/chartSlice";
-import { setFromDate, setToDate } from "../../common/cryptoSlice/cryptoSlice";
+import {
+  setFromDate,
+  setToDate,
+  setIsCustomRange,
+} from "../../common/cryptoSlice/cryptoSlice";
 
 const Calendar = () => {
   const dispatch = useDispatch();
+
   const fromDate = useSelector((state) => state.globalStore.fromDate);
   const toDate = useSelector((state) => state.globalStore.toDate);
 
@@ -24,6 +30,7 @@ const Calendar = () => {
 
   // State to store whether the dropdown is visible or not
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const fetchData = () => {
     coinIDs.forEach((id) => {
@@ -39,19 +46,21 @@ const Calendar = () => {
   };
 
   const handleClick = () => {
+    setIsSubmitted(true);
     fetchData();
     setDropdownVisible(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    dispatch(setIsCustomRange(true));
   };
 
   return (
     <div className="flex flex-col items-center relative  ">
       <button
-        className="relative bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold text-sm flex items-center
-        justify-between shadow  px-2 py-1 md:px-4 md:py-2 rounded"
+        className={`relative font-semibold text-sm flex items-center
+        justify-between shadow  px-2 py-1 md:px-4 md:py-2 rounded ${
+          isSubmitted
+            ? "bg-light-button-selected dark:bg-dark-button-selected hover:bg-light-button-selected-hover dark:hover:bg-dark-button-selected-hover"
+            : "bg-light-button dark:bg-dark-button hover:bg-light-button-hover dark:hover:bg-dark-button-hover font-semibold"
+        }`}
         onClick={() => setDropdownVisible(!dropdownVisible)}
       >
         <svg
@@ -110,7 +119,6 @@ const Calendar = () => {
                 className="w-full  py-2 px-4 border border-transparent  rounded-md bg-light-button-selected dark:bg-dark-button-selected hover:bg-light-button-selected-hover dark:hover:bg-dark-button-selected-hover hover:text-white font-semibold text-sm flex items-center
                 justify-between shadow-lg transition duration-150 ease-in-out"
                 onClick={handleClick}
-                onSubmit={handleSubmit}
               >
                 Submit
               </button>
