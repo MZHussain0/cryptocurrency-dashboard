@@ -26,6 +26,10 @@ Almabetter-Cryptocurrency-dashboard is an application that uses the coinGecko AP
 
 [dashboard-mobile](https://imgur.com/iqjFz2c)
 
+![light](https://user-images.githubusercontent.com/37292226/213191342-e3e97251-5fc1-48af-98c8-2b32fd2d827e.png)
+![dark](https://user-images.githubusercontent.com/37292226/213191356-47781ea4-1193-4fd2-ae2d-458f23189d3f.PNG)
+![mobile](https://user-images.githubusercontent.com/37292226/213191359-94963288-af72-460a-9ee1-7f5bf11ad17d.PNG)
+
 ## Technologies
 
 I used `react`, `tailwindcss`, `react-redux`, `axios`, `javascript`.
