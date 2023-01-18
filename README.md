@@ -20,11 +20,11 @@ Almabetter-Cryptocurrency-dashboard is an application that uses the coinGecko AP
 
 ## Screenshots
 
-`[Imgur](https://imgur.com/Hbr9tUi)`
+![homepage-light](./screenshot/alma1.png)
 
-`[Imgur](https://imgur.com/P6aRnAV)`
+![homepage-dark](./screenshot/alma2.png)
 
-`[Imgur](https://imgur.com/iqjFz2c)`
+![homepage-mobile](./screenshot/alma3.PNG)
 
 ## Technologies
 
