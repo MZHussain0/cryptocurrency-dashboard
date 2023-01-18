@@ -11,7 +11,7 @@ Access the live dashboard at https://almab-dashboard.netlify.app/
 - [About The App](#about-the-app)
 - [Screenshots](#screenshots)
 - [Technologies](#technologies)
-- [Installation and Setup](#setup)
+- [Installation and Setup](#installation-and-setup)
 - [Approach](#approach)
 
 ## About The App
@@ -20,11 +20,11 @@ Almabetter-Cryptocurrency-dashboard is an application that uses the coinGecko AP
 
 ## Screenshots
 
-![homepage-light](./screenshot/alma1.png)
+[dashboard-light](https://imgur.com/Hbr9tUi)
 
-![homepage-dark](./screenshot/alma2.png)
+[dashboard-dark](https://imgur.com/P6aRnAV)
 
-![homepage-mobile](./screenshot/alma3.PNG)
+[dashboard-mobile](https://imgur.com/iqjFz2c)
 
 ## Technologies
 
