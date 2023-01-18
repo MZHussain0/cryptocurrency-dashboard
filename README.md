@@ -46,7 +46,7 @@ To Visit App:
 
 ## Approach
 
-This was a 4 week long project built during AlmaBetter training. Project goals included using frontend technologies learned up until this point and familiarizing myself with documentation for new features.
+This was a capstone project built during AlmaBetter training. Project goals included using frontend technologies learned up until this point and familiarizing myself with documentation for new features.
 
 I was supposed to build a dashboard where the user can track coins through charts. I started this process by using the `create-vite-app` then adding `tailwind` ,`redux` and `axios`.
 
