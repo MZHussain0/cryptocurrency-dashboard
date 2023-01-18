@@ -19,10 +19,11 @@ Access the live dashboard at https://almab-dashboard.netlify.app/
 Almabetter-Cryptocurrency-dashboard is an application that uses the coinGecko API and displays the data & charts and allow coin conversion based on user preferences.
 
 ## Screenshots
-
-<img src="https://user-images.githubusercontent.com/37292226/213191342-e3e97251-5fc1-48af-98c8-2b32fd2d827e.png" alt="light" width="250" >
-<img src="https://user-images.githubusercontent.com/37292226/213191356-47781ea4-1193-4fd2-ae2d-458f23189d3f.PNG" alt="dark" width="250" >
+<center>
+<img src="https://user-images.githubusercontent.com/37292226/213191342-e3e97251-5fc1-48af-98c8-2b32fd2d827e.png" alt="light" width="350" >
+<img src="https://user-images.githubusercontent.com/37292226/213191356-47781ea4-1193-4fd2-ae2d-458f23189d3f.PNG" alt="dark" width="350" >
 <img src="https://user-images.githubusercontent.com/37292226/213191359-94963288-af72-460a-9ee1-7f5bf11ad17d.PNG" alt="mobile" width="200">
+</center>
 
 ## Technologies
 
