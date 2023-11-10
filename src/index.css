@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-
   button {
-    @apply px-4 py-2 rounded-md shadow-lg
+    @apply px-4 py-2 rounded-md shadow-lg;
   }
 
   .dashboard_item {
-    @apply rounded-lg shadow-lg
+    @apply rounded-lg shadow-lg;
   }
 
   :root {
@@ -30,29 +29,29 @@
     --color-text-light-muted: #454545;
     --color-light-fill: #fff;
     --color-fill-light-muted: #c7c7c7;
-    --color-light-button: #DEDEDE;
-    --color-button-light-hover: #C7C7C7;
-    --color-list-light-hover: #E84B4F;
-    --color-list-light-selected: #ED7377;
-    --color-button-light-selected: #0476D0;
-    --color-button-light-selected-hover: #088FFA;
+    --color-light-button: #dedede;
+    --color-button-light-hover: #c7c7c7;
+    --color-list-light-hover: #e84b4f;
+    --color-list-light-selected: #ed7377;
+    --color-button-light-selected: #0476d0;
+    --color-button-light-selected-hover: #088ffa;
 
     /* dark color themes */
-    --color-text-dark-base: #E8E8E8;
-    --color-text-dark-muted: #BABABA;
+    --color-text-dark-base: #e8e8e8;
+    --color-text-dark-muted: #bababa;
     --color-dark-fill: #222222;
     --color-fill-dark-muted: #171717;
     --color-dark-button: #454545;
-    --color-button-dark-hover: #5C5C5C;
-    --color-list-dark-hover: #E84B4F;
-    --color-list-dark-selected: #ED7377;
-    --color-button-dark-selected: #0476D0;
-    --color-button-dark-selected-hover: #088FFA;
+    --color-button-dark-hover: #5c5c5c;
+    --color-list-dark-hover: #e84b4f;
+    --color-list-dark-selected: #ed7377;
+    --color-button-dark-selected: #0476d0;
+    --color-button-dark-selected-hover: #088ffa;
   }
 }
 
 body {
   margin: 0;
   padding: 0;
-  color: #1a1a1a
+  color: #1a1a1a;
 }

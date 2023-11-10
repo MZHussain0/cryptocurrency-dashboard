@@ -1,10 +1,8 @@
 // component renders a dropdown selector with list of supported currencies
 
 // Library imports
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { useRef } from "react";
 // File imports
 import { setCurrency, setSymbol } from "../../common/cryptoSlice/cryptoSlice";
 import { fetchAsyncCurrencies } from "../../common/cryptoSlice/CurrencySlice";
@@ -50,8 +48,7 @@ const Currency = () => {
     <div ref={ref} className="relative flex items-center justify-center">
       <button
         className=" min-w-full h-[3.5rem] flex items-center justify-between  bg-white dark:bg-dark-button font-bold  hover:bg-slate-200 dark:hover:bg-dark-button-hover shadow-lg"
-        onClick={() => setIsOpen(!isOpen)}
-      >
+        onClick={() => setIsOpen(!isOpen)}>
         <p className="text-center">{currency.toUpperCase()}</p>
         <span>
           <svg
@@ -60,8 +57,7 @@ const Currency = () => {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={`${isOpen ? "-rotate-180" : ""}`}
-          >
+            className={`${isOpen ? "-rotate-180" : ""}`}>
             <path
               d="M6.1018 8C5.02785 8 4.45387 9.2649 5.16108 10.0731L10.6829 16.3838C11.3801 17.1806 12.6197 17.1806 13.3169 16.3838L18.8388 10.0731C19.5459 9.2649 18.972 8 17.898 8H6.1018Z"
               fill="#000"
@@ -73,8 +69,7 @@ const Currency = () => {
       <div
         className={`absolute top-full max-h-60 overflow-y-auto border-2 border-black min-w-full w-max bg-light-fill dark:bg-dark-fill z-10 mt-1 rounded-lg shadow-xl ${
           isOpen ? "block" : "hidden"
-        }`}
-      >
+        }`}>
         <ul className="">
           {currencies.map((currency) => (
             <li
@@ -84,8 +79,7 @@ const Currency = () => {
                 dispatch(setCurrency(currency));
                 dispatch(setSymbol(convertCurrency(currency)));
                 setIsOpen(false);
-              }}
-            >
+              }}>
               {currency.toUpperCase()}
             </li>
           ))}

@@ -2,8 +2,7 @@
 // and displays in a dropdown.
 
 // Library imports
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 // Files imports
@@ -31,14 +30,12 @@ const SearchBar = () => {
   return (
     <div
       className="relative 
-    "
-    >
+    ">
       <form onSubmit={submitHandler}>
         <div
           className={
             "flex justify-between overflow-hidden border rounded-lg shadow-xl border-white dark:border-black"
-          }
-        >
+          }>
           <input
             type="text"
             className="block w-full flex-1 py-4 px-4 bg-light-fill dark:bg-dark-fill font-semibold"
@@ -56,8 +53,7 @@ const SearchBar = () => {
         <div
           className={`absolute w-full z-20 flex flex-col border-2 border-black  overflow-hidden  shadow-xl bg-light-fill dark:bg-dark-fill rounded-lg  ${
             isOpen ? "" : "hidden"
-          }`}
-        >
+          }`}>
           {search.slice(0, 3).map((coin) => (
             <FilteredSearch coin={coin} key={coin.id} setIsOpen={setIsOpen} />
           ))}

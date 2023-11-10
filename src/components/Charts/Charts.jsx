@@ -1,9 +1,8 @@
 // component renders the charts based on selected coins from a drop and type of chart selected. It fetches the data based on date and custom date ranges selected from a calendar component.
 
 // Library imports
-import React from "react";
-import { Fragment, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // Files imports
 import {
@@ -11,16 +10,16 @@ import {
   fetchAsyncHistoricData,
 } from "../../common/cryptoSlice/chartSlice";
 import { getAllCoins } from "../../common/cryptoSlice/coinsSlice";
-import { filteredData } from "../../common/miscelleneous/filterData";
 import { compactNumbers } from "../../common/miscelleneous/compactNumbers";
+import { filteredData } from "../../common/miscelleneous/filterData";
 import { getRandomColor } from "../../common/miscelleneous/randomColor";
 
 // component imports
-import { chartDays } from "./days";
 import ButtonGroup from "./ButtonGroup";
+import ChartCanvas from "./ChartCanvas";
 import ChartType from "./ChartType";
 import MultiCoinSelectionBtn from "./MultiCoinSelectionBtn";
-import ChartCanvas from "./ChartCanvas";
+import { chartDays } from "./days";
 
 const Charts = () => {
   const dispatch = useDispatch();
@@ -29,12 +28,10 @@ const Charts = () => {
   const currency = useSelector((state) => state.globalStore.currency);
   const symbol = useSelector((state) => state.globalStore.symbol);
   const isCustomRange = useSelector((state) => state.globalStore.isCustomRange);
-  console.log("🚀 ~ file: Calendar.jsx:17 ~ isCustomRange", isCustomRange);
 
   const coinIDs = useSelector((state) => state.globalStore.coinIDs);
 
   const marketCapData = useSelector((state) => state.market.data);
-  console.log("🚀 ~ file: Charts.jsx:37 ~ marketCapData", marketCapData);
 
   const loading = useSelector((state) => state.market.loading);
 

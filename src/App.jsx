@@ -15,7 +15,7 @@ function App() {
   const symbol = useSelector((state) => state.globalStore.symbol);
 
   return (
-    <div className="min-h-screen max-w-screen-2xl bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+    <div className="min-h-screen bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
       {/* Header Component */}
       <header className="">
         <Header />
@@ -23,11 +23,11 @@ function App() {
 
       {/* Main content Area */}
       <div className="p-4">
-        <div className=" bg-light-muted dark:bg-dark-muted duration-100 rounded p-4  m-auto grid grid-cols-1 lg:grid-cols-4 gap-4 ">
+        <div className="bg-light-muted dark:bg-dark-muted duration-100 rounded-xl p-4  m-auto grid grid-cols-1 lg:grid-cols-4 gap-4">
           <main className="grid gap-4 lg:col-span-3">
             {/* ----------------------------------------------- */}
             <div className="grid gap-4 grid-cols-9 grid-rows-1">
-              <section className="col-span-2 text-light-base dark:text-dark-base text-sm sm:text-base ">
+              <section className="dashboard_item col-span-2 text-light-base dark:text-dark-base text-sm sm:text-base ">
                 <Currency />
               </section>
               <section className="dashboard_item col-span-7 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
@@ -36,7 +36,7 @@ function App() {
             </div>
             {/* ----------------------------------------------- */}
 
-            <section className="dashboard_item bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+            <section className="dashboard_item h-[525px] bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base ">
               <Charts currency={currency} symbol={symbol} />
             </section>
             {/* ------------------------------------------------- */}
@@ -55,7 +55,7 @@ function App() {
             {/* ----------------------------------------------- */}
           </main>
 
-          <aside className="dashboard_item lg:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
+          <aside className=" dashboard_item lg:col-span-1 bg-light-fill dark:bg-dark-fill text-light-base dark:text-dark-base">
             <TopCoins currency={currency} />
           </aside>
         </div>

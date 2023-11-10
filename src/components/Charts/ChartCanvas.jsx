@@ -2,16 +2,16 @@
 // It is defaulted to the line chart.
 
 import React from "react";
-import { Line, Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
 import {
-  Chart as ChartJS,
   BarElement,
-  LineElement,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  Legend,
   Tooltip,
 } from "chart.js";
 import { useSelector } from "react-redux";
@@ -34,10 +34,9 @@ const ChartCanvas = ({ data, options }) => {
       style={{
         position: "relative",
         width: "99%",
-        height: "260px",
+        height: "400px",
         marginTop: "1rem",
-      }}
-    >
+      }}>
       {chartType === "Bar Chart" ? (
         <Bar data={data} options={options} />
       ) : (
