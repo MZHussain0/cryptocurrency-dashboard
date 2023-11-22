@@ -37,7 +37,11 @@ const Currency = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center animate-pulse bg-white dark:bg-dark-button h-full">
+        Loading...
+      </div>
+    );
   }
 
   if (error) {
