@@ -13,6 +13,7 @@ const SearchBar = () => {
   const coins = useSelector(getAllCoins);
 
   const [search, setSearch] = useState([]);
+  const [coin, setCoin] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const submitHandler = (e) => {
@@ -41,6 +42,7 @@ const SearchBar = () => {
             className="block w-full flex-1 py-4 px-4 bg-light-fill dark:bg-dark-fill font-semibold"
             placeholder="Search your favourite cryptocurrencies"
             id="search"
+            value={coin}
             onChange={searchChangeHandler}
             onClick={() => {
               setIsOpen(!isOpen);
@@ -55,7 +57,12 @@ const SearchBar = () => {
             isOpen ? "" : "hidden"
           }`}>
           {search.slice(0, 3).map((coin) => (
-            <FilteredSearch coin={coin} key={coin.id} setIsOpen={setIsOpen} />
+            <FilteredSearch
+              coin={coin}
+              key={coin.id}
+              setIsOpen={setIsOpen}
+              setCoin={setCoin}
+            />
           ))}
         </div>
       )}
